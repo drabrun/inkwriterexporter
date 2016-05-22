@@ -1,0 +1,29 @@
+extends layout
+
+block content
+  nav.navbar.navbar-inverse.navbar-fixed-top
+        .container
+          .navbar-header
+            button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#navbar', aria-expanded='false', aria-controls='navbar')
+              span.sr-only Toggle navigation
+              span.icon-bar
+              span.icon-bar
+              span.icon-bar
+            a.navbar-brand(href='#') Ink Writer Exporter
+          #navbar.collapse.navbar-collapse
+            ul.nav.navbar-nav
+              li.active
+                a(href='#') Home
+          // /.nav-collapse
+
+  .container(style='text-align:center')
+    h1 Inkwriter Export Tool
+    p.lead Enter your inkwriter shared URL. Export your story in the format that you'd like.
+    form
+      .input-group.input-group-lg
+        .input-group-addon(id='sizing-addon1') Ink Writer URL
+        input.form-control(type='text', placeholder='URL', aria-describedby='sizing-addon1')
+        span.input-group-btn
+          button.btn.btn-default(type='button') Process!
+    div.well(style='margin-top:20px',id='procOutput')
+      h3 Please Enter a URL.
