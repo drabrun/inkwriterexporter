@@ -18,12 +18,25 @@ block content
 
   .container(style='text-align:center')
     h1 Inkwriter Export Tool
-    p.lead Enter your inkwriter shared URL. Export your story in the format that you'd like.
+    p.lead Enter your inkwriter shared URL, run the process and then export your story into one of the available formats.
     form
       .input-group.input-group-lg
         .input-group-addon(id='sizing-addon1') Ink Writer URL
-        input.form-control(type='text', placeholder='URL', aria-describedby='sizing-addon1')
+        input.form-control(type='text', placeholder='http://writer.inklestudios.com/stories/<ID>', aria-describedby='sizing-addon1',id='inputURL')
         span.input-group-btn
-          button.btn.btn-default(type='button') Process!
-    div.well(style='margin-top:20px',id='procOutput')
-      h3 Please Enter a URL.
+          button.btn.btn-default(type='button',id='btnProcessURL') Process!
+    .well(style='margin-top:20px;display:none',id='procOutput')
+      .row
+        .col-md-6(id='procOutputLeft')
+        .col-md-6
+          h1(id="lblTitle")
+          .row
+            .col-md-12
+              .b(role='toolbar',style='text-align:center')
+                .btn-group(role='group')
+                  button.btn.btn-primary.btn-lg(id='wordDownload',type='button') Word
+                .btn-group(role='group')
+                  button.btn.btn-primary.btn-lg(type='button') PDF
+                .btn-group(role='group')
+                  button.btn.btn-primary.btn-lg(type='button') HTML
+          p(id="lblInitial")
