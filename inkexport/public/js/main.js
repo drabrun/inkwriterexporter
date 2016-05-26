@@ -23,47 +23,14 @@ function syntaxHighlight(json) {
         return '<span class="' + cls + '">' + match + '</span>';
     });
 }
-function processPart(docx,section,stitches){
-    var info = null;
-    var title = null;
-    var link = [];
-    
-        var content = section.content;
-        for(var i = 0; i < content.length; i++){
-            if(info == null)
-                info = content[0];
-            if(content[i].linkPath)
-                link.push({link:content[i].linkPath,option:content[i].option})
-            if(content[i].pageLabel)
-                title = content[i].pageLabel;
-        }
-    
-    /*
-    var pObj = docx.createP();
-    
-    pObj.options.align = 'center';
-    pObj.addText(title);
-    pObj.addLineBreak ();
-    //pObj.addLineBreak ();
-    //pObj.addLineBreak ();
-    pObj.addText(info);
-    //pObj.addLineBreak ();
-    pObj.addLineBreak ();
-    for(var i = 0; i < link.length; i++){
-        pObj.addText(link[i].option + " - GO TO : " + link[i].link)
-        //pObj.addLineBreak ();
-        //pObj.addLineBreak ();
-    }
-        */
-        var dave = 'das'
-}
+ 
 
 var currentStoryID = null;
 $(document).ready(function(){
     
     $("#wordDownload").on("click",function(evt){
         evt.preventDefault();
-        window.location.href = "/processURL"
+        window.location.href = "/downloadWord?key="+currentStoryID
     });
     
     $("#btnProcessURL").on("click",function(evt){
@@ -81,15 +48,7 @@ $(document).ready(function(){
                     var initial = datum.data.initial;
             var first = datum.data.stitches[initial];
             var docx = null;
-            processPart(docx,first,datum.data.stitches);
-            
-            for(var stitch in datum.data.stitches){
-                var currStitch = datum.data.stitches[stitch];
-                if(stitch != initial){
-                    console.log(stitch+"\n")
-                    processPart(docx,currStitch)
-                }
-            }
+             
             
                     var str = JSON.stringify(datum, undefined, 2);
                     $("#procOutputLeft").append("<pre><code>"+str+"</code></pre>")
