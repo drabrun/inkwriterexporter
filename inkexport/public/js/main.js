@@ -23,7 +23,43 @@ function syntaxHighlight(json) {
         return '<span class="' + cls + '">' + match + '</span>';
     });
 }
- 
+
+function startProcess(){
+    enteredURL = $("#inputURL").val();
+    if(isValidInkWriterURL(enteredURL)){
+        var title = null;
+        var initial = null;
+         //run process
+        $.ajax({
+            type: 'GET',
+            url: '/processURL?url='+enteredURL,
+            contentType: 'application/json; charset=utf-8',
+            success: function(datum){
+                
+                var initial = datum.data.initial;
+        var first = datum.data.stitches[initial];
+        var docx = null;
+         
+        
+                var str = JSON.stringify(datum, undefined, 2);
+                $("#procOutputLeft").append("<pre><code>"+str+"</code></pre>")
+                $("#procOutput").show();
+                
+                title = datum.title;
+                initial = datum.data.initial;
+                currentStoryID = datum.url_key;
+                $("#lblTitle").html(title);
+                $("#lblInitial").html(initial);
+                
+            },
+            error: function(){alert('didn\'t work')}
+        });
+        return;
+    }else{
+       //invalid, alert the authorities 
+        alert("Bad URL")
+    }
+}
 
 var currentStoryID = null;
 $(document).ready(function(){
@@ -33,41 +69,16 @@ $(document).ready(function(){
         window.location.href = "/downloadWord?key="+currentStoryID
     });
     
-    $("#btnProcessURL").on("click",function(evt){
-        enteredURL = $("#inputURL").val();
-        if(isValidInkWriterURL(enteredURL)){
-            var title = null;
-            var initial = null;
-             //run process
-            $.ajax({
-                type: 'GET',
-                url: '/processURL?url='+enteredURL,
-                contentType: 'application/json; charset=utf-8',
-                success: function(datum){
-                    
-                    var initial = datum.data.initial;
-            var first = datum.data.stitches[initial];
-            var docx = null;
-             
-            
-                    var str = JSON.stringify(datum, undefined, 2);
-                    $("#procOutputLeft").append("<pre><code>"+str+"</code></pre>")
-                    $("#procOutput").show();
-                    
-                    title = datum.title;
-                    initial = datum.data.initial;
-                    currentStoryID = datum.url_key;
-                    $("#lblTitle").html(title);
-                    $("#lblInitial").html(initial);
-                    
-                },
-                error: function(){alert('didn\'t work')}
-            });
-            return;
-        }else{
-           //invalid, alert the authorities 
-            alert("Bad URL")
+    $("#inputURL").keypress(function(e) {
+        e.preventDefault();
+        if(e.which == 13) {
+            startProcess();
         }
+    });
+    
+    
+    $("#btnProcessURL").on("click",function(evt){
+        startProcess();
         
     })
 })
