@@ -1,5 +1,5 @@
 function isValidInkWriterURL(url){
-    var matches = url.match(/http:\/\/writer\.inklestudios\.com\/stories\/[a-zA-Z]+$/)
+    var matches = url.match(/http:\/\/writer\.inklestudios\.com\/stories\/[a-zA-Z0-9]+$/)
     if(matches == null)
         return false;
     
