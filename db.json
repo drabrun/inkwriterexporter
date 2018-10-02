@@ -2,7 +2,7 @@
   "profile": {
     "name": "davewashere",
     "permissions": {
-      "roles" : ["TS", "DS", "FM", "KT"]
+      "roles" : ["TS"]
     }
   }
 }
