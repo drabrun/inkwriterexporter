@@ -1,8 +1,17 @@
 {
-  "profile": {
-    "name": "davewashere",
-    "permissions": {
-      "roles" : [{"value" : "TK", "value" : "HCS", "value" : "IPFREELY"}]
-    }
-  }
+	"ENTITY": {
+		"name": "davewashere",
+
+		"fineAccessControls": [{
+				"value": "TK"
+			},
+			{
+				"value": "HCS"
+			},
+			{
+				"value": "IPFREELY"
+			}
+		]
+
+	}
 }
